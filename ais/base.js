@@ -20,7 +20,7 @@ export default class Base {
         return this.placeRandom(board);
     };
 
-    train(boards) {
+    async train(boards) {
         console.error('Cant train base classs');
     }
 };

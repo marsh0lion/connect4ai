@@ -54,12 +54,12 @@ export default class Brain extends Base {
         return ret;
     }
 
-    train(boards) {
+    async train(boards) {
         if (this.crossValidate === undefined) {
             this.crossValidate = new brain.CrossValidate(() => new brain.NeuralNetwork());
         }
         let brainData = boards.map(board => {return {output: board.output, input:this.flatten(board.input)};});
-        this.crossValidate.train(brainData, {log: true, iterations: 10});
+        await this.crossValidate.train(brainData, {log: true, iterations: 10});
         this.net = this.crossValidate.toNeuralNetwork();
 
         const json = this.net.toJSON(); // all stats in json as well as neural networks
