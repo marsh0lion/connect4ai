@@ -1,0 +1,7 @@
+{
+    "name": "aitc4",
+    "type": "module",
+    "dependencies": {
+        "brain.js": "2.0.0-beta.23"
+    }
+}
