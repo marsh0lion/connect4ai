@@ -1,6 +1,6 @@
-import Brain from "./ais/brain.js";
+import TensorFlow from "./ais/tensorflow.js";
 
-let brainAI = new Brain();
+let tensorflow = new TensorFlow();
 let board = []
 let trainingData = [];
 resetBoard();
@@ -84,7 +84,6 @@ function isFull() {
 
 function trainingGame() {
     let player = 'o';
-    
     let train1 = [];
     let train2 = [];
     let train = train1;
@@ -93,7 +92,7 @@ function trainingGame() {
 
     do {
         player = player === 'x' ? 'o' : 'x';
-        num = brainAI.move(board);
+        num = tensorflow.move(board);
         let currentBoard = JSON.parse(JSON.stringify(board));
         let output = [0,0,0,0,0,0,0];
         output[num] = 1;
@@ -119,14 +118,14 @@ function trainingGame() {
     resetBoard();
 }
 
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 100; i++) {
     console.log('loop:' + i);
     trainingGame();
 }
 
-brainAI.train(trainingData);
+await tensorflow.train(trainingData);
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 1000; i++) {
     console.log('loop:' + i);
     trainingGame();
 }
