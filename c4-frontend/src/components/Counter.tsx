@@ -1,9 +1,14 @@
 export type CounterProps = {
-  player: 'o' | 'x'
+  player: 'o' | 'x' | undefined
 }
 
 export function Counter({player}: CounterProps) {
-  const ariaLabel = player === 'o' ? 'Player 1 counter' : 'Player 2 counter'
+  let ariaLabel: string = 'Empty';
+  if (player === 'o') {
+    ariaLabel = 'Player 1 counter';
+  } else if (player === 'x') {
+    ariaLabel = 'Player 2 counter';
+  }
 
   return (
     <div
