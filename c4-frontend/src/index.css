@@ -34,6 +34,21 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+
+.counter {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+
+.counter--x {
+  background-color: #0000ff;
+}
+
+.counter--o {
+  background-color: #ff0000;
+} 
+
 /*
 button {
   border-radius: 8px;
