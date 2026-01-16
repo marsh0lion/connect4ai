@@ -1,7 +1,11 @@
 import { Counter, type CounterProps } from './Counter.tsx';
-import { Button} from './Button.tsx';
+import { Button } from './Button.tsx';
 
 export type ColumnProps = {
+  onDrop: () => void;
+} & Counters;
+
+export type Counters = {
   counters: [
     CounterProps,
     CounterProps,
@@ -10,22 +14,24 @@ export type ColumnProps = {
     CounterProps,
     CounterProps,
     CounterProps,
-  ]
+  ],
 }
 
-export function Column({counters}: ColumnProps) {
+export function Column({counters, onDrop}: ColumnProps) {
   function handleDrop() {
-    console.log('dropping in column');
-  }
+    onDrop();
+  };
+
+  const displayCounters = counters.toReversed();
 
   return (
     <div className="column">
       <Button label="Drop" onClick={handleDrop} />
       {
-        counters.map((counterProps: CounterProps, index: number) => (
+        displayCounters.map((counterProps: CounterProps, index: number) => (
           <Counter key={index} {...counterProps} />
         ))
       }
     </div>
-  )
+  );
 }
