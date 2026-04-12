@@ -13,7 +13,6 @@ export type Counters = {
     CounterProps,
     CounterProps,
     CounterProps,
-    CounterProps,
   ],
 }
 
