@@ -46,7 +46,7 @@ export default class TensorFlow extends Base {
     };
 
     isOpen(n, board) {
-        return board[n].length < 6;
+        return board[n].includes(null);
     };
 
     move(board) {
