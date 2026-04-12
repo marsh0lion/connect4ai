@@ -1,5 +1,5 @@
 export type CounterProps = {
-  player: 'o' | 'x' | undefined
+  player: 'o' | 'x' | null
 }
 
 export function Counter({player}: CounterProps) {
@@ -12,7 +12,7 @@ export function Counter({player}: CounterProps) {
 
   return (
     <div
-      className={`counter counter--${player}`}
+      className={`counter ${player ? `counter--${player}` : ''}`}
       aria-label={ariaLabel}
     />
   )

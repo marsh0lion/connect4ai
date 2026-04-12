@@ -8,46 +8,46 @@ function App() {
   const [columns, setColumns] = useState<Counters[]>([
     { 
       counters: [
-        {player: undefined}, {player: undefined}, {player: undefined},
-        {player: undefined}, {player: undefined}, {player: undefined},
-        {player: undefined},
+        {player: null}, {player: null}, {player: null},
+        {player: null}, {player: null}, {player: null},
       ]
     },
     { 
       counters: [
-        {player: undefined}, {player: undefined}, {player: undefined},
-        {player: undefined}, {player: undefined}, {player: undefined},
-        {player: undefined},
+        {player: null}, {player: null}, {player: null},
+        {player: null}, {player: null}, {player: null},
       ]
     },    
     { 
       counters: [
-        {player: undefined}, {player: undefined}, {player: undefined},
-        {player: undefined}, {player: undefined}, {player: undefined},
-        {player: undefined},
+        {player: null}, {player: null}, {player: null},
+        {player: null}, {player: null}, {player: null},
       ]
     },    
     { 
       counters: [
-        {player: undefined}, {player: undefined}, {player: undefined},
-        {player: undefined}, {player: undefined}, {player: undefined},
-        {player: undefined},
+        {player: null}, {player: null}, {player: null},
+        {player: null}, {player: null}, {player: null},
       ]
     },
     { 
       counters: [
-        {player: undefined}, {player: undefined}, {player: undefined},
-        {player: undefined}, {player: undefined}, {player: undefined},
-        {player: undefined},
+        {player: null}, {player: null}, {player: null},
+        {player: null}, {player: null}, {player: null},
       ]
     },
     { 
       counters: [
-        {player: undefined}, {player: undefined}, {player: undefined},
-        {player: undefined}, {player: undefined}, {player: undefined},
-        {player: undefined},
+        {player: null}, {player: null}, {player: null},
+        {player: null}, {player: null}, {player: null},
       ]
     },  
+    { 
+      counters: [
+        {player: null}, {player: null}, {player: null},
+        {player: null}, {player: null}, {player: null},
+      ]
+    },
 
   ]);
 
@@ -61,10 +61,10 @@ function App() {
       return;
     }
     
-    const number = columns[columnIndex].counters.findIndex(counter => counter.player === undefined);
+    const number = columns[columnIndex].counters.findIndex(counter => counter.player === null);
     const newColumns = columns.map((col, idx) => 
       idx === columnIndex 
-        ? { counters: col.counters.map((c, i) => i === number ? { ...c, player } : c) as [CounterProps, CounterProps, CounterProps, CounterProps, CounterProps, CounterProps, CounterProps] }
+        ? { counters: col.counters.map((c, i) => i === number ? { ...c, player } : c) as [CounterProps, CounterProps, CounterProps, CounterProps, CounterProps, CounterProps] }
         : col
     );
     setColumns(newColumns);
