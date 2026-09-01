@@ -1,7 +1,7 @@
 import TensorFlow from "./ais/tensorflow.js";
 import fs from 'fs';
-import http2 from 'http2';
-import { Board } from './types.js';
+import https from 'https';
+import { type Board } from './types.ts';
 
 let tensorflow = new TensorFlow();
 let board: Board = Array(7).fill(null).map(() => Array(6).fill(null));
@@ -110,22 +110,28 @@ for (let i = 0; i < 1000; i++) {
     trainingGame();
 }
 
-const server = http2.createSecureServer({
+const server = https.createServer({
   key: fs.readFileSync('localhost-privkey.pem'),
   cert: fs.readFileSync('localhost-cert.pem'),
 });
-server.on('error', (err) => console.error(err));
 
-server.on('stream', (stream, headers,c,d,e,f) => {
-    console.log(stream, headers,c,d,e,f);
-    // stream is a Duplex
-    stream.respond({
-        'content-type': 'text/html; charset=utf-8',
-        ':status': 200,
-    });
-    stream.end('<h1>Hello World</h1>');
+server.on('error', (err) => {
+  console.error(err);
 });
 
-server.listen(8443);
+server.on('request', (req, res) => {
+  console.log('Request received:', req.method, req.url);
 
-console.log('finished');
+  res.writeHead(200, {
+    'Content-Type': 'text/plain; charset=utf-8',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  });
+
+  res.end('Connect 4 backend is running');
+});
+
+server.listen(8443, () => {
+  console.log('Backend listening on https://localhost:8443');
+});

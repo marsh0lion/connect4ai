@@ -56,7 +56,7 @@ function App() {
    * @param columnIndex The index of the column that the user is dropping in
    * @returns void
    */
-  function handleDrop(columnIndex: number): void {
+  async function handleDrop(columnIndex: number): Promise<void> {
     if (columnIndex < 0 || columnIndex >= columns.length) {
       return;
     }
@@ -69,7 +69,26 @@ function App() {
     );
     setColumns(newColumns);
     setPlayer(player === 'o' ? 'x' : 'o');
-  };
+
+    try {
+      const response = await fetch('/api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ columnIndex, player }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+
+      const responseBody = await response.text();
+      console.log(responseBody);
+    } catch (error) {
+      console.error('There has been a problem with your fetch operation:', error);
+    }
+  }
 
   return (
     <>
